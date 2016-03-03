@@ -1,0 +1,37 @@
+<%=link_to 'dashboard', current_user %>  
+
+<h2><%=@group.name%> </h2> 
+<p><%=@group.description%></p>
+<% if @group.users_memberships.exclude?(current_user)%> 
+  <form action='/memberships' method='post'>
+      <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+      <input type='hidden' name='group_id' value='<%= @group.id %>'>
+      <input type='submit' value='Join'>
+  </form>
+  
+  <%else%>
+    <form action='/memberships/<%=@group.id%>' method='post'>
+      <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+      <input name="_method" type="hidden" value="delete">
+      <input type='hidden' name='group_id' value='<%= @group.id %>'>
+      <input type='submit' value='Leave'>
+    </form>
+
+
+  <%end%>
+
+<% if @group.user_id == current_user.id %>
+  <h3>Created BY: You </h3>
+
+<%else%>
+
+  <h3>Created BY: <%=@group.user.first_name%> </h3>
+<%end%> 
+
+<b>members</b>
+<ul>
+  <% @group.users_memberships.each do |t| %>
+  <li><%=t.first_name%></li>
+  <%end%> 
+</ul>
+
