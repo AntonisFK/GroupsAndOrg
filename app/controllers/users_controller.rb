@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     if user.errors.count == 0
       flash[:success] ="You have succesfull loged in"
       session[:user_id] = user.id 
-      redirect_to user
+      redirect_to login_path
     else 
       flash[:error] = user.errors.full_messages
       redirect_to '/'

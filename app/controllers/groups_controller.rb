@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :require_login, only: [ :create, :destroy]
+
   
   def show
     @group = Group.find(params[:id])  
@@ -11,8 +11,7 @@ class GroupsController < ApplicationController
   end
 
   def destroy 
-    group = Group.find(params[:group_id])
-    group.destroy
+    Group.where(id: params[:group_id]).destroy_all
     redirect_to current_user
   end 
 

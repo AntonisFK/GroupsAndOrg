@@ -3,7 +3,7 @@
 
 <% @groups.each do |t| %>
   <ul style= "list-style-type: none;">
-  <%if t.id == current_user.id %> 
+  <% if t.user.id == current_user.id %> 
     <form action='/groups/<%=t.id%>' method='post'>
       <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
       <input name="_method" type="hidden" value="delete">

@@ -1,5 +1,4 @@
 class MembershipsController < ApplicationController
-  before_action :require_login, only: [:create, :destroy]
 
   def create 
     @group = Group.find(params[:group_id])

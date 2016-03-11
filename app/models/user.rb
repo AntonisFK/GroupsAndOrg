@@ -1,8 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
-  has_many :groups
-  has_many :memberships
-  has_many :groups_memberships, through: :memberships, source: :group
+  has_many :groups, dependent: :destroy
+  has_many :groups_memberships, through: :memberships, source: :group, dependent: :destroy
   
   # after_create :set_membership
    EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]+)\z/i  
